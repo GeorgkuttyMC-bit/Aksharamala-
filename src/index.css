@@ -1,0 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Inter:wght@400;500;600;700&family=Noto+Sans+Malayalam:wght@400;600;800&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Playfair Display", ui-serif, Georgia, serif;
+  --font-ml: "Noto Sans Malayalam", sans-serif;
+  --font-ui: "Inter", sans-serif;
+}
+
+body {
+  font-family: var(--font-ui);
+  background-color: #fafaf9; /* stone-50 */
+  color: #292524; /* stone-800 */
+  scroll-behavior: smooth;
+}

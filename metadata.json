@@ -1,0 +1,6 @@
+{
+  "name": "Kids Malayalam Learning Platform by George",
+  "description": "An interactive, gamified web app for children to learn Malayalam with audio, interactive modules, and guided progress.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
