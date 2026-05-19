@@ -30,7 +30,7 @@ Use emojis to make it fun!
 If a question is off-topic, gently steer it back to learning Malayalam.`;
 
     const response = await ai.models.generateContent({
-      model: "gemini-3-flash-preview",
+      model: "gemini-3.1-flash",
       contents: prompt,
       config: {
         systemInstruction,
