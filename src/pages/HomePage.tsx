@@ -3,6 +3,7 @@ import { Volume2, BookOpen, Clock, Globe, Square } from "lucide-react";
 import { motion } from "motion/react";
 
 import { Quiz } from "../components/Quiz";
+import { AIAssistant } from "../components/AIAssistant";
 
 const vowels = [
   { letter: "അ", sound: "a", word: "അമ്മ", meaning: "Mother (Amma)", image: "👩‍👧", color: "bg-rose-50 border-rose-200 text-rose-700" },
@@ -312,6 +313,8 @@ export function HomePage() {
         </div>
         <p>© {new Date().getFullYear()} Learn Malayalam. Designed thoughtfully with modern web technologies.</p>
       </footer>
+
+      <AIAssistant />
     </div>
   );
 }
