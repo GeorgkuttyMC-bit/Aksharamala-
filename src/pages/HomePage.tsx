@@ -139,9 +139,9 @@ export function HomePage() {
             Aksharamala <span className="text-sm font-ui text-stone-500">by George</span>
           </div>
           <div className="hidden space-x-8 md:flex">
-            <a href="#history" className="text-sm font-medium text-stone-600 hover:text-amber-600 transition-colors">History</a>
-            <a href="#vowels" className="text-sm font-medium text-stone-600 hover:text-amber-600 transition-colors">Vowels</a>
-            <a href="#consonants" className="text-sm font-medium text-stone-600 hover:text-amber-600 transition-colors">Consonants</a>
+            <a href="#history" className="text-sm font-medium text-stone-600 hover:text-amber-600 transition-colors">ചരിത്രം</a>
+            <a href="#vowels" className="text-sm font-medium text-stone-600 hover:text-amber-600 transition-colors">സ്വരങ്ങൾ</a>
+            <a href="#consonants" className="text-sm font-medium text-stone-600 hover:text-amber-600 transition-colors">വ്യഞ്ജനങ്ങൾ</a>
           </div>
         </div>
       </nav>
@@ -155,28 +155,77 @@ export function HomePage() {
           transition={{ duration: 0.8 }}
           className="z-10 max-w-5xl w-full"
         >
+          <motion.div
+            initial={{ scale: 0, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ type: "spring", bounce: 0.5, delay: 0.2 }}
+            className="mx-auto w-32 h-32 mb-6 cursor-pointer"
+            whileHover={{ scale: 1.1, rotate: 5 }}
+            onClick={() => {
+              const u = new SpeechSynthesisUtterance("നമസ്കാരം! ഞാൻ അപ്പു.");
+              u.lang = 'ml-IN';
+              window.speechSynthesis.speak(u);
+            }}
+            title="Hello, I am Appu!"
+          >
+            <svg viewBox="0 0 200 200" className="w-full h-full drop-shadow-xl" xmlns="http://www.w3.org/2000/svg">
+              <g transform="translate(0, 10)">
+                {/* Ears */}
+                <path d="M 50 60 C 20 60, 20 120, 50 130 C 60 130, 70 110, 70 90 C 70 70, 60 60, 50 60 Z" fill="#94a3b8" />
+                <path d="M 150 60 C 180 60, 180 120, 150 130 C 140 130, 130 110, 130 90 C 130 70, 140 60, 150 60 Z" fill="#94a3b8" />
+                {/* Ear Details (robotic) */}
+                <circle cx="45" cy="95" r="15" fill="#64748b" />
+                <circle cx="155" cy="95" r="15" fill="#64748b" />
+                
+                {/* Head */}
+                <rect x="65" y="50" width="70" height="80" rx="35" fill="#cbd5e1" />
+                
+                {/* Screen Face */}
+                <rect x="75" y="75" width="50" height="30" rx="10" fill="#0f172a" />
+                {/* Digital Eyes */}
+                <circle cx="90" cy="90" r="4" fill="#38bdf8" />
+                <circle cx="110" cy="90" r="4" fill="#38bdf8" />
+                
+                {/* Trunk Base */}
+                <path d="M 85 125 L 115 125 L 110 140 L 90 140 Z" fill="#94a3b8" />
+                {/* Trunk Segments */}
+                <rect x="92" y="142" width="16" height="8" rx="2" fill="#cbd5e1" />
+                <rect x="94" y="152" width="12" height="8" rx="2" fill="#cbd5e1" />
+                <rect x="96" y="162" width="8" height="8" rx="2" fill="#cbd5e1" />
+                <circle cx="100" cy="170" r="4" fill="#38bdf8" />
+                
+                {/* Antenna */}
+                <rect x="97" y="25" width="6" height="25" fill="#94a3b8" />
+                <circle cx="100" cy="20" r="8" fill="#ef4444" className="animate-pulse" />
+                
+                {/* Tusks */}
+                <path d="M 70 120 C 60 140, 50 140, 45 130" fill="none" stroke="#fff" strokeWidth="6" strokeLinecap="round" />
+                <path d="M 130 120 C 140 140, 150 140, 155 130" fill="none" stroke="#fff" strokeWidth="6" strokeLinecap="round" />
+              </g>
+            </svg>
+          </motion.div>
           <h1 className="text-5xl md:text-7xl font-sans font-bold text-stone-900 tracking-tight mb-6">
-            Discover <span className="text-amber-600">Malayalam</span>
+            മലയാളം <span className="text-amber-600">പഠിക്കാം</span>
           </h1>
           <p className="text-xl md:text-2xl text-stone-600 font-medium max-w-2xl mx-auto leading-relaxed mb-16">
-            The classical language of God's Own Country, balancing a rich literary heritage with melodic, distinct phonetics.
+            കേരളത്തിന്റെ തനതായ ഭാഷ. വളരെ ലളിതമായി മലയാളം പഠിക്കാൻ തുടങ്ങാം.
           </p>
 
           <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto text-left">
              <div className="bg-white p-8 rounded-3xl shadow-sm border border-stone-100 flex flex-col items-center text-center hover:shadow-md transition-shadow">
                 <div className="bg-blue-100 text-blue-600 w-14 h-14 rounded-full flex items-center justify-center font-bold text-2xl mb-5">1</div>
-                <h3 className="font-bold text-xl text-stone-900 mb-3">Listen & Learn</h3>
-                <p className="text-stone-600">Click the speaker icons or letters in the guides below to hear the exact pronunciation.</p>
+                <h3 className="font-bold text-xl text-stone-900 mb-3">കേൾക്കാം, പഠിക്കാം</h3>
+                <p className="text-stone-600">ശരിയായ ഉച്ചാരണം കേൾക്കാൻ സ്പീക്കർ ഐക്കണുകളിലോ അക്ഷരങ്ങളിലോ ക്ലിക്ക് ചെയ്യുക.</p>
              </div>
              <div className="bg-white p-8 rounded-3xl shadow-sm border border-stone-100 flex flex-col items-center text-center hover:shadow-md transition-shadow">
                 <div className="bg-amber-100 text-amber-600 w-14 h-14 rounded-full flex items-center justify-center font-bold text-2xl mb-5">2</div>
-                <h3 className="font-bold text-xl text-stone-900 mb-3">Test Your Skills</h3>
-                <p className="text-stone-600">Take the interactive quizzes after each section to reinforce your memory and practice.</p>
+                <h3 className="font-bold text-xl text-stone-900 mb-3">അറിവ് പരിശോധിക്കാം</h3>
+                <p className="text-stone-600">ഓരോ പാഠത്തിനും ശേഷമുള്ള ചോദ്യങ്ങൾക്കുള്ള ഉത്തരങ്ങൾ നൽകാം.</p>
              </div>
              <div className="bg-white p-8 rounded-3xl shadow-sm border border-stone-100 flex flex-col items-center text-center hover:shadow-md transition-shadow">
                 <div className="bg-emerald-100 text-emerald-600 w-14 h-14 rounded-full flex items-center justify-center font-bold text-2xl mb-5">3</div>
-                <h3 className="font-bold text-xl text-stone-900 mb-3">Chat with Appu</h3>
-                <p className="text-stone-600">Use the AI teacher at the bottom right to ask questions or practice learning by voice.</p>
+                <h3 className="font-bold text-xl text-stone-900 mb-3">അപ്പുവിനോട് സംസാരിക്കാം</h3>
+                <p className="text-stone-600">ചോദ്യങ്ങൾ ചോദിക്കാനും പഠിക്കാനും AI ടീച്ചറെ ഉപയോഗിക്കുക.</p>
              </div>
           </div>
         </motion.div>
@@ -186,9 +235,9 @@ export function HomePage() {
       <section id="phonetic-guide" className="py-16 bg-white border-b border-stone-200">
         <div className="mx-auto max-w-5xl px-6">
           <div className="text-center mb-10">
-            <h2 className="text-3xl font-bold font-sans text-stone-900 mb-4">Phonetic Guide</h2>
+            <h2 className="text-3xl font-bold font-sans text-stone-900 mb-4">ഉച്ചാരണ സഹായി</h2>
             <p className="text-lg text-stone-600">
-              Malayalam is highly phonetic. What you read is what you say! Here is a simple guide to start.
+              മലയാളം ഉച്ചാരണ പ്രധാനമായ ഭാഷയാണ്. എങ്ങനെയാണോ എഴുതുന്നത് അതുപോലെയാണ് വായിക്കുന്നത്!
             </p>
           </div>
           
@@ -196,10 +245,10 @@ export function HomePage() {
             <div className="bg-amber-50 rounded-2xl p-8 border border-amber-100">
               <h3 className="text-xl font-bold text-amber-900 mb-4 flex items-center gap-2">
                 <span className="bg-amber-200 text-amber-800 w-8 h-8 rounded-full flex items-center justify-center text-sm">1</span>
-                Vowels (Swarangal)
+                സ്വരങ്ങൾ (Swarangal)
               </h3>
               <p className="text-stone-700 mb-6">
-                Vowels are independent sounds. They can be short (like <strong>a</strong> in "about") or long (like <strong>aa</strong> in "father"). In Malayalam, short and long vowels have distinct letters.
+                സ്വതന്ത്രമായി ഉച്ചരിക്കാൻ കഴിയുന്ന അക്ഷരങ്ങളാണ് സ്വരങ്ങൾ. ഇവയ്ക്ക് ഹ്രസ്വവും ദീർഘവുമായ രൂപങ്ങളുണ്ട്.
               </p>
               <ul className="space-y-3 mb-6 font-medium text-stone-700">
                 <li className="flex items-center gap-2">
@@ -210,17 +259,17 @@ export function HomePage() {
                 </li>
               </ul>
               <a href="#vowels" className="inline-flex items-center font-bold text-amber-700 hover:text-amber-800 transition-colors">
-                Learn Vowels →
+                സ്വരങ്ങൾ പഠിക്കാം →
               </a>
             </div>
 
             <div className="bg-blue-50 rounded-2xl p-8 border border-blue-100">
               <h3 className="text-xl font-bold text-blue-900 mb-4 flex items-center gap-2">
                 <span className="bg-blue-200 text-blue-800 w-8 h-8 rounded-full flex items-center justify-center text-sm">2</span>
-                Consonants (Vyanjanangal)
+                വ്യഞ്ജനങ്ങൾ (Vyanjanangal)
               </h3>
               <p className="text-stone-700 mb-6">
-                Consonants are combined with vowel sounds. By default, every consonant carries the short "a" sound unless modified.
+                സ്വരങ്ങളുടെ സഹായത്തോടെ ഉച്ചരിക്കുന്ന അക്ഷരങ്ങളാണ് വ്യഞ്ജനങ്ങൾ.
               </p>
               <ul className="space-y-3 mb-6 font-medium text-stone-700">
                 <li className="flex items-center gap-2">
@@ -231,7 +280,7 @@ export function HomePage() {
                 </li>
               </ul>
               <a href="#consonants" className="inline-flex items-center font-bold text-blue-700 hover:text-blue-800 transition-colors">
-                Learn Consonants →
+                വ്യഞ്ജനങ്ങൾ പഠിക്കാം →
               </a>
             </div>
           </div>
@@ -242,9 +291,9 @@ export function HomePage() {
       <section id="vowels" className="py-24 bg-stone-50">
         <div className="mx-auto max-w-7xl px-6">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold font-sans text-stone-900 mb-4">Swarangal (Vowels)</h2>
+            <h2 className="text-4xl font-bold font-sans text-stone-900 mb-4">സ്വരങ്ങൾ (Vowels)</h2>
             <p className="text-lg text-stone-500 max-w-2xl mx-auto">
-              Malayalam vowels are independent sounds. They form the foundation of the language. Click on any letter or word to hear its pronunciation.
+              സ്വതന്ത്രമായി ഉച്ചരിക്കാൻ കഴിയുന്ന അക്ഷരങ്ങളാണ് സ്വരങ്ങൾ. ഉച്ചാരണം കേൾക്കാൻ അക്ഷരങ്ങളിലോ വാക്കുകളിലോ ക്ലിക്ക് ചെയ്യുക.
             </p>
           </div>
 
@@ -298,9 +347,9 @@ export function HomePage() {
       <section id="consonants" className="py-24 bg-white border-t border-stone-200">
         <div className="mx-auto max-w-7xl px-6">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold font-sans text-stone-900 mb-4">Vyanjanangal (Consonants)</h2>
+            <h2 className="text-4xl font-bold font-sans text-stone-900 mb-4">വ്യഞ്ജനങ്ങൾ (Consonants)</h2>
             <p className="text-lg text-stone-500 max-w-2xl mx-auto">
-              Malayalam consonants combine with vowels to form syllables. The script is highly phonetic. Explore the vast array of consonants below.
+              സ്വരങ്ങളുടെ സഹായത്തോടെ ഉച്ചരിക്കുന്ന അക്ഷരങ്ങളാണ് വ്യഞ്ജനങ്ങൾ. മലയാളത്തിൽ നിരവധി വ്യഞ്ജനാക്ഷരങ്ങളുണ്ട്.
             </p>
           </div>
 
@@ -346,7 +395,7 @@ export function HomePage() {
             ))}
           </div>
 
-          <Quiz title="Vyanjanangal (Consonants)" items={consonants} />
+          <Quiz title="വ്യഞ്ജനങ്ങൾ (Consonants)" items={consonants} />
         </div>
       </section>
 
@@ -355,24 +404,24 @@ export function HomePage() {
         <div className="mx-auto max-w-4xl px-6">
           <div className="mb-12 flex items-center justify-center space-x-4">
             <Globe className="h-8 w-8 text-amber-500" />
-            <h2 className="text-3xl font-bold font-sans text-stone-900">A Brief History</h2>
+            <h2 className="text-3xl font-bold font-sans text-stone-900">ചരിത്രം</h2>
             <BookOpen className="h-8 w-8 text-amber-500" />
           </div>
           <div className="prose prose-lg prose-stone mx-auto text-stone-600 leading-relaxed font-ui grid md:grid-cols-2 gap-12">
             <div>
               <p>
-                <strong>Malayalam (മലയാളം)</strong> is a Dravidian language predominantly spoken in the Indian state of Kerala and the union territories of Lakshadweep and Puducherry. With over 35 million speakers, it stands as one of the 22 scheduled languages of India and was designated a Classical Language of India in 2013.
+                <strong>മലയാളം</strong> ഇന്ത്യയിലെ കേരള സംസ്ഥാനത്തിലും ലക്ഷദ്വീപിലും പുതുച്ചേരിയിലും പ്രധാനമായും സംസാരിക്കുന്ന ഒരു ദ്രാവിഡ ഭാഷയാണ്. 3 കോടിയിലധികം പേർ സംസാരിക്കുന്ന ഈ ഭാഷ ഇന്ത്യയിലെ 22 ഔദ്യോഗിക ഭാഷകളിൽ ഒന്നാണ്. 2013-ൽ ഇതിനെ ഒരു ക്ലാസിക്കൽ ഭാഷയായി പ്രഖ്യാപിച്ചു.
               </p>
               <p className="mt-4">
-                The origin of Malayalam is deeply rooted in <em>Early Middle Tamil</em>, but it gradually differentiated over centuries. The earliest written record of Malayalam is the <i>Vazhappally copper plate</i> (approx. 832 CE).
+                പ്രാചീന തമിഴിൽ നിന്നാണ് മലയാളത്തിന്റെ ഉത്ഭവം. ലഭ്യമായതിൽ വെച്ച് ഏറ്റവും പഴയ മലയാള ലിഖിത രേഖ ഏകദേശം എ.ഡി. 832-ലെ <i>വാഴപ്പള്ളി ശാസനമാണ്</i>.
               </p>
             </div>
             <div>
                <p>
-                As trade and culture flourished along the Malabar Coast, the language heavily assimilated words from Sanskrit, Arabic, Portuguese, and Dutch. The <em>Manipravalam</em> literary style, a unique mixture of Sanskrit and early Malayalam, hugely influenced its vocabulary and poetic forms.
+                മലബാർ തീരത്ത് വ്യാപാരവും സംസ്കാരവും വികസിച്ചതോടെ സംസ്‌കൃതം, അറബി, പോർച്ചുഗീസ്, ഡച്ച് എന്നീ ഭാഷകളിൽ നിന്നും ധാരാളം വാക്കുകൾ മലയാളത്തിലേക്ക് കടന്നുവന്നു. സംസ്‌കൃതവും ആദ്യകാല മലയാളവും ചേർന്ന <em>മണിപ്രവാളം</em> എന്ന സാഹിത്യ ശൈലി മലയാളത്തിന്റെ പദസമ്പത്തിനെയും കവിതാ രൂപങ്ങളെയും പിൽക്കാലത്ത് വളരെയധികം സ്വാധീനിച്ചു.
               </p>
               <p className="mt-4">
-                Today, the Malayalam script is syllabic in nature, written from left to right. It is renowned for its rounded characters, originating from the ancient <em>Vattezhuthu</em> script, adapted to be easily carved onto palm leaves without splitting them.
+                ഇടത്തുനിന്ന് വലത്തോട്ടാണ് മലയാളം എഴുതുന്നത്. പനയോലകളിൽ എഴുതാൻ എളുപ്പമുള്ള രൂപമായ <em>വട്ടെഴുത്ത്</em> ലിപിയിൽ നിന്നാണ് ഇന്ന് നാം കാണുന്ന ഉരുളൻ അക്ഷരങ്ങൾ രൂപപ്പെട്ടത്.
               </p>
             </div>
           </div>
@@ -383,9 +432,9 @@ export function HomePage() {
       <footer className="bg-stone-900 text-stone-400 py-12 text-center text-sm border-t-4 border-amber-500">
         <div className="flex items-center justify-center gap-2 mb-4">
           <BookOpen className="h-5 w-5" />
-          <span className="font-sans font-bold text-lg text-white">Aksharamala by George</span>
+          <span className="font-sans font-bold text-lg text-white">അക്ഷരമാല (Aksharamala) by George</span>
         </div>
-        <p>© {new Date().getFullYear()} Learn Malayalam. Designed thoughtfully with modern web technologies.</p>
+        <p>© {new Date().getFullYear()} മലയാളം പഠിക്കാം. ആധുനിക വെബ് സാങ്കേതികവിദ്യകൾ ഉപയോഗിച്ച് രൂപകൽപ്പന ചെയ്തത്.</p>
       </footer>
 
       <AIAssistant />

@@ -27,18 +27,18 @@ export function Welcome() {
         </div>
         
         <h1 className="mb-2 text-5xl font-black text-white drop-shadow-md sm:text-7xl">
-          Learn <span className="text-yellow-300">Malayalam</span>
+          മലയാളം <span className="text-yellow-300">പഠിക്കാം</span>
         </h1>
         <p className="mb-10 text-xl font-bold text-white/90 drop-shadow sm:text-3xl">
-          with Appu the Hornbill!
+          അപ്പുവിനോടൊപ്പം!
         </p>
         
         <div className="flex flex-col gap-4 sm:flex-row">
           <Button id="btn-start" size="lg" variant="primary" onClick={() => navigate("/map")}>
-            Start Playing!
+            തുടങ്ങാം!
           </Button>
           <Button id="btn-parent-setup" size="lg" variant="ghost" className="bg-white/50 backdrop-blur-sm" onClick={() => navigate("/parent-setup")}>
-            Parents Section
+            മാതാപിതാക്കൾക്ക്
           </Button>
         </div>
       </motion.div>

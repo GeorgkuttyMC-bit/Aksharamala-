@@ -118,7 +118,7 @@ export function LessonConsonants() {
     if (sequence[step].type === 'learn') {
       playAudio(lessonData[sequence[step].dataIndex].letter);
     } else {
-      playAudio("Where is " + lessonData[sequence[step].dataIndex].letter + "?");
+      playAudio(lessonData[sequence[step].dataIndex].letter + " എവിടെയാണെന്ന് കണ്ടുപിടിക്കാമോ?");
     }
   }, [step]);
 
@@ -206,7 +206,7 @@ export function LessonConsonants() {
                  /* Quiz Interface */
                  <div className="flex flex-col items-center gap-8 w-full">
                     <h2 className="text-3xl font-bold text-slate-800 mb-4 text-center">
-                      Find the matching letter!
+                      ശരിയായ അക്ഷരം കണ്ടുപിടിക്കാമോ?
                     </h2>
                     
                     <div className="flex flex-col items-center gap-4 bg-white p-8 rounded-3xl shadow-sm border-2 border-slate-200 w-full">
@@ -226,11 +226,11 @@ export function LessonConsonants() {
                                whileTap={{ scale: 0.95 }}
                                onClick={() => {
                                  if (optIndex === currentStep.dataIndex) {
-                                   playAudio("Correct!");
+                                   playAudio("ശരിയാണ്!");
                                    setQuizAnswered(true);
                                    confetti({ particleCount: 50, spread: 60, origin: { y: 0.8 } });
                                  } else {
-                                   playAudio("Try again!");
+                                   playAudio("ഒന്നുകൂടി ശ്രമിക്കൂ!");
                                  }
                                }}
                                className={`h-24 rounded-2xl text-4xl font-ml font-bold border-4 transition-colors ${
@@ -257,13 +257,13 @@ export function LessonConsonants() {
              size="lg" 
              variant="primary" 
              onClick={handleNext}
-             className="h-20 w-full max-w-lg text-3xl font-black bg-blue-500 shadow-[0_6px_0_0_#2563eb] hover:bg-blue-400 border-none"
+             className="h-20 w-full max-w-lg text-3xl font-black bg-blue-500 shadow-[0_6px_0_0_#2563eb] hover:bg-blue-400 border-none flex items-center justify-center gap-4"
            >
-             {step < sequence.length - 1 ? "Next!" : "Finish!"} <ArrowRight className="ml-4 h-8 w-8" />
+             {step < sequence.length - 1 ? "അടുത്തത്" : "പൂർത്തിയാക്കാം!"} <ArrowRight className="h-8 w-8" />
            </Button>
          ) : (
            <div className="h-20 w-full max-w-lg flex items-center justify-center text-slate-500 font-bold text-xl">
-             Select the correct answer to continue
+             തുടരാൻ ശരിയായ ഉത്തരം തിരഞ്ഞെടുക്കുക
            </div>
          )}
       </footer>

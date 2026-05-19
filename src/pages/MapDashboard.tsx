@@ -8,9 +8,9 @@ export function MapDashboard() {
 
   // Basic map levels
   const levels = [
-    { id: 1, name: "Vowel Valley", subName: "സ്വരങ്ങൾ", status: "unlocked", path: "/lesson/vowels", x: "20%", y: "70%", color: "bg-green-400" },
-    { id: 2, name: "Consonant Cave", subName: "വ്യഞ്ജനങ്ങൾ", status: "unlocked", path: "/lesson/consonants", x: "40%", y: "45%", color: "bg-slate-300" },
-    { id: 3, name: "Animal Safari", subName: "മൃഗങ്ങൾ", status: "locked", path: "#", x: "70%", y: "25%", color: "bg-slate-300" },
+    { id: 1, name: "സ്വരങ്ങൾ പഠിക്കാം", subName: "സ്വരങ്ങൾ", status: "unlocked", path: "/lesson/vowels", x: "20%", y: "70%", color: "bg-green-400" },
+    { id: 2, name: "വ്യഞ്ജനങ്ങൾ പഠിക്കാം", subName: "വ്യഞ്ജനങ്ങൾ", status: "unlocked", path: "/lesson/consonants", x: "40%", y: "45%", color: "bg-slate-300" },
+    { id: 3, name: "മൃഗങ്ങൾ", subName: "മൃഗങ്ങൾ", status: "locked", path: "#", x: "70%", y: "25%", color: "bg-slate-300" },
   ];
 
   return (
@@ -86,7 +86,7 @@ export function MapDashboard() {
             className="absolute bottom-10 right-10 flex gap-4"
          >
             <div className="relative flex items-center justify-center rounded-3xl rounded-br-none bg-white p-4 shadow-xl">
-               <p className="text-xl font-bold text-slate-800">Tap on Level 1 to start!</p>
+               <p className="text-xl font-bold text-slate-800">തുടങ്ങാൻ ആദ്യ പാഠത്തിൽ ക്ലിക്ക് ചെയ്യുക!</p>
                <button className="ml-2 rounded-full bg-slate-100 p-2 text-blue-500">
                   <Volume2 className="h-6 w-6" />
                </button>

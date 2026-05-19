@@ -104,17 +104,17 @@ export function Quiz({ items, title }: QuizProps) {
 
   return (
     <div className="max-w-2xl mx-auto mt-16 p-8 bg-white rounded-3xl border-2 border-stone-100 shadow-sm">
-      <h3 className="text-2xl font-bold font-sans text-stone-800 mb-6 text-center">{title} Quiz</h3>
+      <h3 className="text-2xl font-bold font-sans text-stone-800 mb-6 text-center">{title} ചോദ്യാവലി</h3>
       
       {!showResult ? (
         <div>
           <div className="flex justify-between items-center mb-8">
-            <span className="text-sm font-bold text-stone-400 uppercase tracking-wider">Question {currentQuestion + 1} of {QUESTIONS_COUNT}</span>
-            <span className="text-sm font-bold text-amber-600 uppercase tracking-wider">Score: {score}</span>
+            <span className="text-sm font-bold text-stone-400 uppercase tracking-wider">ചോദ്യം {currentQuestion + 1} / {QUESTIONS_COUNT}</span>
+            <span className="text-sm font-bold text-amber-600 uppercase tracking-wider">സ്കോർ: {score}</span>
           </div>
           
           <div className="flex flex-col items-center mb-10">
-            <span className="text-stone-500 font-medium mb-6">Which letter does this word start with?</span>
+            <span className="text-stone-500 font-medium mb-6">ഈ വാക്ക് തുടങ്ങുന്ന അക്ഷരം ഏതാണ്?</span>
             <div className="flex items-center gap-6 bg-stone-50 border border-stone-200 px-10 py-8 rounded-3xl">
               <span className="text-7xl drop-shadow-sm">{targetItem.image}</span>
               <div className="flex flex-col">
@@ -154,10 +154,10 @@ export function Quiz({ items, title }: QuizProps) {
       ) : (
         <div className="text-center py-12">
           <div className="text-8xl mb-8 animate-bounce">{score >= Math.ceil(QUESTIONS_COUNT / 2) ? "🎉" : "📚"}</div>
-          <h4 className="text-4xl font-bold text-stone-800 mb-4">Quiz Complete!</h4>
-          <p className="text-xl text-stone-600 mb-10 font-medium">You scored <span className="text-amber-600 font-bold">{score}</span> out of {QUESTIONS_COUNT}</p>
+          <h4 className="text-4xl font-bold text-stone-800 mb-4">പൂർത്തിയായി!</h4>
+          <p className="text-xl text-stone-600 mb-10 font-medium">നിങ്ങൾക്ക് {QUESTIONS_COUNT}-ൽ <span className="text-amber-600 font-bold">{score}</span> സ്കോർ ലഭിച്ചു.</p>
           <Button onClick={resetQuiz} size="lg" className="gap-2 bg-amber-500 hover:bg-amber-600 border-b-4 border-amber-700 text-white rounded-2xl px-8 h-14 text-lg">
-            <RotateCcw className="h-5 w-5" /> Play Again
+            <RotateCcw className="h-5 w-5" /> വീണ്ടും കളിക്കുക
           </Button>
         </div>
       )}

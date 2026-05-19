@@ -36,11 +36,11 @@ export function AIAssistant() {
         console.error("Speech recognition error", event.error);
         setIsListening(false);
         if (event.error === 'not-allowed') {
-          setMessages(prev => [...prev, { role: "assistant", content: "Oops! 🙊 I need microphone permission to hear you. Please allow microphone access in your browser." }]);
+          setMessages(prev => [...prev, { role: "assistant", content: "ഹലോ! 🙊 എനിക്ക് നിങ്ങളുടെ ശബ്ദം കേൾക്കാൻ മൈക്രോഫോൺ ഉപയോഗിക്കാൻ അനുവാദം നൽകുക." }]);
         } else if (event.error === 'no-speech') {
           // just ignore or maybe notify
         } else {
-          setMessages(prev => [...prev, { role: "assistant", content: `Oops! 🙊 Microphone error: ${event.error}` }]);
+          setMessages(prev => [...prev, { role: "assistant", content: `ക്ഷമിക്കണം! 🙊 മൈക്രോഫോൺ തകരാറ്: ${event.error}` }]);
         }
       };
       
@@ -62,7 +62,7 @@ export function AIAssistant() {
   const toggleListening = (e: React.MouseEvent) => {
     e.preventDefault();
     if (!recognitionRef.current) {
-      setMessages(prev => [...prev, { role: "assistant", content: "Oops! 🙊 Voice input is not supported in this browser." }]);
+      setMessages(prev => [...prev, { role: "assistant", content: "ക്ഷമിക്കണം! 🙊 ഈ ബ്രൗസറിൽ ശബ്ദനിർദ്ദേശം ലഭ്യമല്ല." }]);
       return;
     }
     if (isListening) {
@@ -147,20 +147,21 @@ export function AIAssistant() {
       {/* Floating Button */}
       <button
         onClick={() => setIsOpen(true)}
-        className={`fixed bottom-6 right-6 z-40 p-4 rounded-full bg-amber-500 text-white shadow-lg hover:bg-amber-600 transition-all hover:scale-105 active:scale-95 flex items-center justify-center ${isOpen ? 'hidden' : 'flex'}`}
+        className={`fixed top-24 right-6 z-40 px-6 py-4 rounded-full bg-amber-500 text-white shadow-lg hover:bg-amber-600 transition-all hover:scale-105 active:scale-95 flex items-center justify-center gap-3 ${isOpen ? 'hidden' : 'flex'}`}
         aria-label="Ask AI Teacher"
       >
-        <Bot className="w-8 h-8" />
+        <span className="text-3xl leading-none">🐘</span>
+        <span className="font-bold text-lg font-sans">അപ്പു (Appu)</span>
       </button>
 
       {/* Chat Window */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, y: 50, scale: 0.9 }}
+            initial={{ opacity: 0, y: -50, scale: 0.9 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 50, scale: 0.9 }}
-            className="fixed bottom-6 right-6 z-50 w-80 sm:w-96 h-[500px] max-h-[80vh] bg-white rounded-2xl shadow-2xl flex flex-col overflow-hidden border border-stone-200"
+            exit={{ opacity: 0, y: -50, scale: 0.9 }}
+            className="fixed top-24 right-6 z-50 w-80 sm:w-96 h-[500px] max-h-[80vh] bg-white rounded-2xl shadow-2xl flex flex-col overflow-hidden border border-stone-200"
           >
             {/* Header */}
             <div className="bg-amber-500 p-4 text-white flex items-center justify-between shadow-sm">
