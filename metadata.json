@@ -1,5 +1,5 @@
 {
-  "name": "Kids Malayalam Learning Platform by George",
+  "name": "Aksharamala by George",
   "description": "An interactive, gamified web app for children to learn Malayalam with audio, interactive modules, and guided progress.",
   "requestFramePermissions": [
     "microphone"

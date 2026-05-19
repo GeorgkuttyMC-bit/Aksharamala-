@@ -136,7 +136,7 @@ export function HomePage() {
       <nav className="fixed top-0 z-50 w-full bg-stone-50/80 backdrop-blur-md border-b border-stone-200">
         <div className="mx-auto max-w-7xl px-6 py-4 flex items-center justify-between">
           <div className="text-2xl font-bold font-sans tracking-tight text-stone-900">
-            Kids Malayalam <span className="text-amber-600">Learning Platform</span> <span className="text-sm font-ui text-stone-500">by George</span>
+            Aksharamala <span className="text-sm font-ui text-stone-500">by George</span>
           </div>
           <div className="hidden space-x-8 md:flex">
             <a href="#history" className="text-sm font-medium text-stone-600 hover:text-amber-600 transition-colors">History</a>
@@ -153,14 +153,32 @@ export function HomePage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="z-10 max-w-4xl"
+          className="z-10 max-w-5xl w-full"
         >
           <h1 className="text-5xl md:text-7xl font-sans font-bold text-stone-900 tracking-tight mb-6">
             Discover <span className="text-amber-600">Malayalam</span>
           </h1>
-          <p className="text-xl md:text-2xl text-stone-600 font-medium max-w-2xl mx-auto leading-relaxed">
+          <p className="text-xl md:text-2xl text-stone-600 font-medium max-w-2xl mx-auto leading-relaxed mb-16">
             The classical language of God's Own Country, balancing a rich literary heritage with melodic, distinct phonetics.
           </p>
+
+          <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto text-left">
+             <div className="bg-white p-8 rounded-3xl shadow-sm border border-stone-100 flex flex-col items-center text-center hover:shadow-md transition-shadow">
+                <div className="bg-blue-100 text-blue-600 w-14 h-14 rounded-full flex items-center justify-center font-bold text-2xl mb-5">1</div>
+                <h3 className="font-bold text-xl text-stone-900 mb-3">Listen & Learn</h3>
+                <p className="text-stone-600">Click the speaker icons or letters in the guides below to hear the exact pronunciation.</p>
+             </div>
+             <div className="bg-white p-8 rounded-3xl shadow-sm border border-stone-100 flex flex-col items-center text-center hover:shadow-md transition-shadow">
+                <div className="bg-amber-100 text-amber-600 w-14 h-14 rounded-full flex items-center justify-center font-bold text-2xl mb-5">2</div>
+                <h3 className="font-bold text-xl text-stone-900 mb-3">Test Your Skills</h3>
+                <p className="text-stone-600">Take the interactive quizzes after each section to reinforce your memory and practice.</p>
+             </div>
+             <div className="bg-white p-8 rounded-3xl shadow-sm border border-stone-100 flex flex-col items-center text-center hover:shadow-md transition-shadow">
+                <div className="bg-emerald-100 text-emerald-600 w-14 h-14 rounded-full flex items-center justify-center font-bold text-2xl mb-5">3</div>
+                <h3 className="font-bold text-xl text-stone-900 mb-3">Chat with Appu</h3>
+                <p className="text-stone-600">Use the AI teacher at the bottom right to ask questions or practice learning by voice.</p>
+             </div>
+          </div>
         </motion.div>
       </section>
 
@@ -365,7 +383,7 @@ export function HomePage() {
       <footer className="bg-stone-900 text-stone-400 py-12 text-center text-sm border-t-4 border-amber-500">
         <div className="flex items-center justify-center gap-2 mb-4">
           <BookOpen className="h-5 w-5" />
-          <span className="font-sans font-bold text-lg text-white">Kids Malayalam Learning Platform by George</span>
+          <span className="font-sans font-bold text-lg text-white">Aksharamala by George</span>
         </div>
         <p>© {new Date().getFullYear()} Learn Malayalam. Designed thoughtfully with modern web technologies.</p>
       </footer>
