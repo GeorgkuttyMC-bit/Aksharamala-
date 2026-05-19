@@ -164,6 +164,62 @@ export function HomePage() {
         </motion.div>
       </section>
 
+      {/* Phonetic Guide Section */}
+      <section id="phonetic-guide" className="py-16 bg-white border-b border-stone-200">
+        <div className="mx-auto max-w-5xl px-6">
+          <div className="text-center mb-10">
+            <h2 className="text-3xl font-bold font-sans text-stone-900 mb-4">Phonetic Guide</h2>
+            <p className="text-lg text-stone-600">
+              Malayalam is highly phonetic. What you read is what you say! Here is a simple guide to start.
+            </p>
+          </div>
+          
+          <div className="grid md:grid-cols-2 gap-8">
+            <div className="bg-amber-50 rounded-2xl p-8 border border-amber-100">
+              <h3 className="text-xl font-bold text-amber-900 mb-4 flex items-center gap-2">
+                <span className="bg-amber-200 text-amber-800 w-8 h-8 rounded-full flex items-center justify-center text-sm">1</span>
+                Vowels (Swarangal)
+              </h3>
+              <p className="text-stone-700 mb-6">
+                Vowels are independent sounds. They can be short (like <strong>a</strong> in "about") or long (like <strong>aa</strong> in "father"). In Malayalam, short and long vowels have distinct letters.
+              </p>
+              <ul className="space-y-3 mb-6 font-medium text-stone-700">
+                <li className="flex items-center gap-2">
+                  <span className="font-ml text-xl font-bold text-amber-700">അ</span> (a) vs <span className="font-ml text-xl font-bold text-amber-700">ആ</span> (aa)
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="font-ml text-xl font-bold text-amber-700">ഇ</span> (i) vs <span className="font-ml text-xl font-bold text-amber-700">ഈ</span> (ee)
+                </li>
+              </ul>
+              <a href="#vowels" className="inline-flex items-center font-bold text-amber-700 hover:text-amber-800 transition-colors">
+                Learn Vowels →
+              </a>
+            </div>
+
+            <div className="bg-blue-50 rounded-2xl p-8 border border-blue-100">
+              <h3 className="text-xl font-bold text-blue-900 mb-4 flex items-center gap-2">
+                <span className="bg-blue-200 text-blue-800 w-8 h-8 rounded-full flex items-center justify-center text-sm">2</span>
+                Consonants (Vyanjanangal)
+              </h3>
+              <p className="text-stone-700 mb-6">
+                Consonants are combined with vowel sounds. By default, every consonant carries the short "a" sound unless modified.
+              </p>
+              <ul className="space-y-3 mb-6 font-medium text-stone-700">
+                <li className="flex items-center gap-2">
+                  <span className="font-ml text-xl font-bold text-blue-700">ക</span> (ka) - Hard 'k'
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="font-ml text-xl font-bold text-blue-700">ഗ</span> (ga) - Soft 'g'
+                </li>
+              </ul>
+              <a href="#consonants" className="inline-flex items-center font-bold text-blue-700 hover:text-blue-800 transition-colors">
+                Learn Consonants →
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Vowels Section */}
       <section id="vowels" className="py-24 bg-stone-50">
         <div className="mx-auto max-w-7xl px-6">
