@@ -163,35 +163,6 @@ export function HomePage() {
         </motion.div>
       </section>
 
-      {/* History Section */}
-      <section id="history" className="py-20 bg-white border-y border-stone-100">
-        <div className="mx-auto max-w-4xl px-6">
-          <div className="mb-12 flex items-center justify-center space-x-4">
-            <Globe className="h-8 w-8 text-amber-500" />
-            <h2 className="text-3xl font-bold font-sans text-stone-900">A Brief History</h2>
-            <BookOpen className="h-8 w-8 text-amber-500" />
-          </div>
-          <div className="prose prose-lg prose-stone mx-auto text-stone-600 leading-relaxed font-ui grid md:grid-cols-2 gap-12">
-            <div>
-              <p>
-                <strong>Malayalam (മലയാളം)</strong> is a Dravidian language predominantly spoken in the Indian state of Kerala and the union territories of Lakshadweep and Puducherry. With over 35 million speakers, it stands as one of the 22 scheduled languages of India and was designated a Classical Language of India in 2013.
-              </p>
-              <p className="mt-4">
-                The origin of Malayalam is deeply rooted in <em>Early Middle Tamil</em>, but it gradually differentiated over centuries. The earliest written record of Malayalam is the <i>Vazhappally copper plate</i> (approx. 832 CE).
-              </p>
-            </div>
-            <div>
-               <p>
-                As trade and culture flourished along the Malabar Coast, the language heavily assimilated words from Sanskrit, Arabic, Portuguese, and Dutch. The <em>Manipravalam</em> literary style, a unique mixture of Sanskrit and early Malayalam, hugely influenced its vocabulary and poetic forms.
-              </p>
-              <p className="mt-4">
-                Today, the Malayalam script is syllabic in nature, written from left to right. It is renowned for its rounded characters, originating from the ancient <em>Vattezhuthu</em> script, adapted to be easily carved onto palm leaves without splitting them.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Vowels Section */}
       <section id="vowels" className="py-24 bg-stone-50">
         <div className="mx-auto max-w-7xl px-6">
@@ -301,6 +272,35 @@ export function HomePage() {
           </div>
 
           <Quiz title="Vyanjanangal (Consonants)" items={consonants} />
+        </div>
+      </section>
+
+      {/* History Section */}
+      <section id="history" className="py-20 bg-stone-50 border-y border-stone-200">
+        <div className="mx-auto max-w-4xl px-6">
+          <div className="mb-12 flex items-center justify-center space-x-4">
+            <Globe className="h-8 w-8 text-amber-500" />
+            <h2 className="text-3xl font-bold font-sans text-stone-900">A Brief History</h2>
+            <BookOpen className="h-8 w-8 text-amber-500" />
+          </div>
+          <div className="prose prose-lg prose-stone mx-auto text-stone-600 leading-relaxed font-ui grid md:grid-cols-2 gap-12">
+            <div>
+              <p>
+                <strong>Malayalam (മലയാളം)</strong> is a Dravidian language predominantly spoken in the Indian state of Kerala and the union territories of Lakshadweep and Puducherry. With over 35 million speakers, it stands as one of the 22 scheduled languages of India and was designated a Classical Language of India in 2013.
+              </p>
+              <p className="mt-4">
+                The origin of Malayalam is deeply rooted in <em>Early Middle Tamil</em>, but it gradually differentiated over centuries. The earliest written record of Malayalam is the <i>Vazhappally copper plate</i> (approx. 832 CE).
+              </p>
+            </div>
+            <div>
+               <p>
+                As trade and culture flourished along the Malabar Coast, the language heavily assimilated words from Sanskrit, Arabic, Portuguese, and Dutch. The <em>Manipravalam</em> literary style, a unique mixture of Sanskrit and early Malayalam, hugely influenced its vocabulary and poetic forms.
+              </p>
+              <p className="mt-4">
+                Today, the Malayalam script is syllabic in nature, written from left to right. It is renowned for its rounded characters, originating from the ancient <em>Vattezhuthu</em> script, adapted to be easily carved onto palm leaves without splitting them.
+              </p>
+            </div>
+          </div>
         </div>
       </section>
 
