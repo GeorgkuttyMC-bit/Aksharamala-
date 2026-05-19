@@ -35,6 +35,13 @@ export function AIAssistant() {
       recognition.onerror = (event: any) => {
         console.error("Speech recognition error", event.error);
         setIsListening(false);
+        if (event.error === 'not-allowed') {
+          setMessages(prev => [...prev, { role: "assistant", content: "Oops! 🙊 I need microphone permission to hear you. Please allow microphone access in your browser." }]);
+        } else if (event.error === 'no-speech') {
+          // just ignore or maybe notify
+        } else {
+          setMessages(prev => [...prev, { role: "assistant", content: `Oops! 🙊 Microphone error: ${event.error}` }]);
+        }
       };
       
       recognition.onresult = (event: any) => {
@@ -54,11 +61,15 @@ export function AIAssistant() {
 
   const toggleListening = (e: React.MouseEvent) => {
     e.preventDefault();
+    if (!recognitionRef.current) {
+      setMessages(prev => [...prev, { role: "assistant", content: "Oops! 🙊 Voice input is not supported in this browser." }]);
+      return;
+    }
     if (isListening) {
-      recognitionRef.current?.stop();
+      recognitionRef.current.stop();
     } else {
       try {
-        recognitionRef.current?.start();
+        recognitionRef.current.start();
       } catch (err) {
         console.error("Failed to start speech recognition", err);
       }
