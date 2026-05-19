@@ -39,7 +39,7 @@ Use emojis to make it fun!
 If a question is off-topic, gently steer it back to learning Malayalam.`;
 
       const response = await ai.models.generateContent({
-        model: "gemini-3.1-flash",
+        model: "gemini-2.5-flash",
         contents: prompt,
         config: {
           systemInstruction,
@@ -48,9 +48,9 @@ If a question is off-topic, gently steer it back to learning Malayalam.`;
       });
 
       res.json({ answer: response.text });
-    } catch (error) {
+    } catch (error: any) {
       console.error("Gemini API Error:", error);
-      res.status(500).json({ error: "Failed to connect to the AI teacher. Try again later!" });
+      res.status(500).json({ error: `Failed to connect to the AI teacher: ${error.message}` });
     }
   });
 
