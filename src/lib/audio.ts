@@ -10,23 +10,22 @@ export const playIndianAudio = (text: string, onEnd?: () => void, options?: { pi
   // because OS native voices for Malayalam are often missing on desktop PCs.
   const url = `https://translate.googleapis.com/translate_tts?ie=UTF-8&q=${encodeURIComponent(text)}&tl=ml&client=tw-ob`;
   
-  const audio = new Audio(url);
-  // TTS API rate is already normal, but we can apply playbackRate if requested
-  audio.playbackRate = options?.rate || 1.0;
-  
-  if (onEnd) {
-    audio.onended = onEnd;
+  if (!currentAudio) {
+    currentAudio = new Audio();
   }
+
+  currentAudio.src = url;
+  currentAudio.playbackRate = options?.rate || 1.0;
   
-  audio.onerror = (e) => {
+  currentAudio.onended = onEnd || null;
+  
+  currentAudio.onerror = (e) => {
     console.warn("Google TTS failed, falling back to window.speechSynthesis", e);
     // Fallback to SpeechSynthesis
     playWithSpeechSynthesis(text, onEnd, options);
   };
 
-  currentAudio = audio;
-  
-  audio.play().catch(e => {
+  currentAudio.play().catch(e => {
     console.warn("Audio play blocked or failed", e);
     // Fallback to SpeechSynthesis if audio is blocked by browser policies
     playWithSpeechSynthesis(text, onEnd, options);
@@ -105,7 +104,6 @@ export const stopAudio = () => {
   if (currentAudio) {
     currentAudio.pause();
     currentAudio.currentTime = 0;
-    currentAudio = null;
   }
   if ('speechSynthesis' in window) {
     window.speechSynthesis.cancel();

@@ -3,6 +3,7 @@ import { Volume2, BookOpen, Clock, Globe, Square } from "lucide-react";
 import { motion } from "motion/react";
 
 import { Quiz } from "../components/Quiz";
+import { VocabularyGames } from "../components/VocabularyGames";
 import { AIAssistant } from "../components/AIAssistant";
 import { playIndianAudio, stopAudio as playLibStopAudio } from "../lib/audio";
 
@@ -117,6 +118,7 @@ export function HomePage() {
             <a href="#history" className="text-sm font-medium text-stone-600 hover:text-amber-600 transition-colors">ചരിത്രം</a>
             <a href="#vowels" className="text-sm font-medium text-stone-600 hover:text-amber-600 transition-colors">സ്വരങ്ങൾ</a>
             <a href="#consonants" className="text-sm font-medium text-stone-600 hover:text-amber-600 transition-colors">വ്യഞ്ജനങ്ങൾ</a>
+            <a href="#games" className="text-sm font-medium text-stone-600 hover:text-amber-600 transition-colors">കളികൾ</a>
           </div>
         </div>
       </nav>
@@ -369,6 +371,20 @@ export function HomePage() {
           </div>
 
           <Quiz title="വ്യഞ്ജനങ്ങൾ (Consonants)" items={consonants} />
+        </div>
+      </section>
+
+      {/* Vocabulary Games Section */}
+      <section id="games" className="py-24 bg-rose-50 border-t border-stone-200">
+        <div className="mx-auto max-w-7xl px-6">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold font-sans text-stone-900 mb-4">പദവിനോദങ്ങൾ (Word Games)</h2>
+            <p className="text-lg text-stone-500 max-w-2xl mx-auto">
+              കളികളിലൂടെ പുതിയ വാക്കുകൾ പഠിക്കാം! (Let's learn new words through games!)
+            </p>
+          </div>
+          
+          <VocabularyGames items={[...vowels, ...consonants]} />
         </div>
       </section>
 
