@@ -9,32 +9,60 @@ export const playIndianAudio = (text: string, onEnd?: () => void, options?: { pi
     window.speechSynthesis.cancel();
   }
   
-  // Use setTimeout to avoid the Windows Chrome cancel() bug
-  setTimeout(() => {
-    const utterance = new SpeechSynthesisUtterance(text);
-    utterance.lang = 'ml-IN';
-    utterance.rate = options?.rate || 0.8;
-    if (options?.pitch) utterance.pitch = options?.pitch;
-    
-    // Prevent garbage collection
-    (window as any)._currentUtterance = utterance;
-    
-    // Try to find a specific Malayalam voice or Indian English/Hindi voice if ml-IN is not available
+  const utterance = new SpeechSynthesisUtterance(text);
+  utterance.lang = 'ml-IN';
+  utterance.rate = options?.rate || 0.8;
+  if (options?.pitch) utterance.pitch = options?.pitch;
+  
+  if (onEnd) {
+    utterance.onend = onEnd;
+    utterance.onerror = (e) => {
+      console.error("Speech synthesis error", e);
+      onEnd();
+    };
+  }
+  
+  // Prevent garbage collection
+  (window as any)._currentUtterance = utterance;
+  
+  const speak = () => {
     const voices = window.speechSynthesis.getVoices();
     if (voices.length > 0) {
       const mlVoice = voices.find(v => v.lang.includes('ml'));
-      const inVoice = voices.find(v => v.lang.includes('IN')); // Fallback to any Indian voice
+      const inVoice = voices.find(v => v.lang.includes('IN'));
       if (mlVoice) utterance.voice = mlVoice;
       else if (inVoice) utterance.voice = inVoice;
     }
     
-    if (onEnd) {
-      utterance.onend = onEnd;
-      utterance.onerror = onEnd;
-    }
-    
     window.speechSynthesis.speak(utterance);
-  }, 50);
+    
+    // Workaround for Chrome bug where speech synthesis gets stuck
+    if (window.speechSynthesis.paused) {
+      window.speechSynthesis.resume();
+    }
+  };
+
+  if (window.speechSynthesis.getVoices().length === 0) {
+    let voicesChangedFired = false;
+    const onVoicesChanged = () => {
+      if (voicesChangedFired) return;
+      voicesChangedFired = true;
+      window.speechSynthesis.removeEventListener('voiceschanged', onVoicesChanged);
+      speak();
+    };
+    window.speechSynthesis.addEventListener('voiceschanged', onVoicesChanged);
+    
+    // Fallback if event doesn't fire
+    setTimeout(() => {
+      if (!voicesChangedFired) {
+        voicesChangedFired = true;
+        window.speechSynthesis.removeEventListener('voiceschanged', onVoicesChanged);
+        speak();
+      }
+    }, 250);
+  } else {
+    speak();
+  }
 };
 
 export const stopAudio = () => {
