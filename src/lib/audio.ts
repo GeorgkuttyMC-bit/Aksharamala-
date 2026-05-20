@@ -1,14 +1,45 @@
+let currentAudio: HTMLAudioElement | null = null;
+let currentUtterance: SpeechSynthesisUtterance | null = null;
+
 export const playIndianAudio = (text: string, onEnd?: () => void, options?: { pitch?: number, rate?: number, cancel?: boolean }) => {
+  if (options?.cancel !== false) {
+    stopAudio();
+  }
+
+  // Use Google Translate TTS as it is much more reliable for Malayalam across all devices (PC, Mac, iOS)
+  // because OS native voices for Malayalam are often missing on desktop PCs.
+  const url = `https://translate.googleapis.com/translate_tts?ie=UTF-8&q=${encodeURIComponent(text)}&tl=ml&client=tw-ob`;
+  
+  const audio = new Audio(url);
+  // TTS API rate is already normal, but we can apply playbackRate if requested
+  audio.playbackRate = options?.rate || 1.0;
+  
+  if (onEnd) {
+    audio.onended = onEnd;
+  }
+  
+  audio.onerror = (e) => {
+    console.warn("Google TTS failed, falling back to window.speechSynthesis", e);
+    // Fallback to SpeechSynthesis
+    playWithSpeechSynthesis(text, onEnd, options);
+  };
+
+  currentAudio = audio;
+  
+  audio.play().catch(e => {
+    console.warn("Audio play blocked or failed", e);
+    // Fallback to SpeechSynthesis if audio is blocked by browser policies
+    playWithSpeechSynthesis(text, onEnd, options);
+  });
+};
+
+const playWithSpeechSynthesis = (text: string, onEnd?: () => void, options?: { pitch?: number, rate?: number }) => {
   if (!('speechSynthesis' in window)) {
     console.log(`Speech Synthesis not supported. Would have said: ${text}`);
     if (onEnd) onEnd();
     return;
   }
-  
-  if (options?.cancel !== false) {
-    window.speechSynthesis.cancel();
-  }
-  
+
   // Use setTimeout to ensure cancel() has completed before creating and speaking the new utterance.
   setTimeout(() => {
     const utterance = new SpeechSynthesisUtterance(text);
@@ -26,14 +57,16 @@ export const playIndianAudio = (text: string, onEnd?: () => void, options?: { pi
     
     // Prevent garbage collection
     (window as any)._currentUtterance = utterance;
+    currentUtterance = utterance;
     
     const speak = () => {
       const voices = window.speechSynthesis.getVoices();
       if (voices.length > 0) {
-        const mlVoice = voices.find(v => v.lang.includes('ml'));
-        const inVoice = voices.find(v => v.lang.includes('IN'));
-        if (mlVoice) utterance.voice = mlVoice;
-        else if (inVoice) utterance.voice = inVoice;
+        const mlVoice = voices.find(v => v.lang.includes('ml') || (v.name && v.name.toLowerCase().includes('malayalam')));
+        if (mlVoice) {
+          utterance.voice = mlVoice;
+        }
+        // Do not force an 'IN' voice (like en-IN) because it will fail to read Malayalam script!
       }
       
       window.speechSynthesis.speak(utterance);
@@ -69,6 +102,11 @@ export const playIndianAudio = (text: string, onEnd?: () => void, options?: { pi
 };
 
 export const stopAudio = () => {
+  if (currentAudio) {
+    currentAudio.pause();
+    currentAudio.currentTime = 0;
+    currentAudio = null;
+  }
   if ('speechSynthesis' in window) {
     window.speechSynthesis.cancel();
   }
