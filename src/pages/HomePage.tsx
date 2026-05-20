@@ -93,13 +93,16 @@ export function HomePage() {
     playIndianAudio(letter, () => {
       if (currentlyPlayingRef.current !== letter) return;
       
-      playIndianAudio(word, () => {
-        if (currentlyPlayingRef.current === letter) {
-          currentlyPlayingRef.current = null;
-          setPlayingLetter(null);
-        }
-      }, { cancel: false, rate: 0.8 });
-    }, { cancel: false, rate: 0.8 });
+      setTimeout(() => {
+        if (currentlyPlayingRef.current !== letter) return;
+        playIndianAudio(word, () => {
+          if (currentlyPlayingRef.current === letter) {
+            currentlyPlayingRef.current = null;
+            setPlayingLetter(null);
+          }
+        }, { cancel: false, rate: 0.6 });
+      }, 400);
+    }, { cancel: false, rate: 0.6 });
   };
 
   return (
