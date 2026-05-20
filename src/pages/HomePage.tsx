@@ -4,6 +4,7 @@ import { motion } from "motion/react";
 
 import { Quiz } from "../components/Quiz";
 import { AIAssistant } from "../components/AIAssistant";
+import { playIndianAudio, stopAudio as playLibStopAudio } from "../lib/audio";
 
 const vowels = [
   { letter: "അ", sound: "a", word: "അമ്മ", meaning: "Mother (Amma)", image: "👩‍👧", color: "bg-rose-50 border-rose-200 text-rose-700" },
@@ -74,57 +75,37 @@ export function HomePage() {
 
   useEffect(() => {
     return () => {
-      if ('speechSynthesis' in window) {
-        window.speechSynthesis.cancel();
-      }
+      playLibStopAudio();
     };
   }, []);
 
   const stopAudio = () => {
     currentlyPlayingRef.current = null;
     setPlayingLetter(null);
-    if ('speechSynthesis' in window) {
-      window.speechSynthesis.cancel();
-    }
+    playLibStopAudio();
   };
 
   const playContinuous = (letter: string, word: string) => {
-    if (!('speechSynthesis' in window)) {
-      console.log(`Speech Synthesis not supported. Would have said: ${letter}, ${word}`);
-      return;
-    }
-    
-    // Stop currently playing
-    window.speechSynthesis.cancel();
+    playLibStopAudio();
     currentlyPlayingRef.current = letter;
     setPlayingLetter(letter);
 
     const playSequence = () => {
       if (currentlyPlayingRef.current !== letter) return;
 
-      const uLetter = new SpeechSynthesisUtterance(letter);
-      uLetter.lang = 'ml-IN';
-      uLetter.rate = 0.8;
-
-      const uWord = new SpeechSynthesisUtterance(word);
-      uWord.lang = 'ml-IN';
-      uWord.rate = 0.8;
-
-      uWord.onend = () => {
-        if (currentlyPlayingRef.current === letter) {
-          setTimeout(() => {
-            if (currentlyPlayingRef.current === letter) {
-              playSequence();
-            }
-          }, 800);
-        }
-      };
-
-      uLetter.onerror = () => { if (currentlyPlayingRef.current === letter) stopAudio(); };
-      uWord.onerror = () => { if (currentlyPlayingRef.current === letter) stopAudio(); };
-
-      window.speechSynthesis.speak(uLetter);
-      window.speechSynthesis.speak(uWord);
+      playIndianAudio(letter, () => {
+        if (currentlyPlayingRef.current !== letter) return;
+        
+        playIndianAudio(word, () => {
+          if (currentlyPlayingRef.current === letter) {
+            setTimeout(() => {
+              if (currentlyPlayingRef.current === letter) {
+                playSequence();
+              }
+            }, 800);
+          }
+        }, { cancel: false, rate: 0.8 });
+      }, { cancel: false, rate: 0.8 });
     };
 
     playSequence();
@@ -162,9 +143,7 @@ export function HomePage() {
             className="mx-auto w-32 h-32 mb-6 cursor-pointer"
             whileHover={{ scale: 1.1, rotate: 5 }}
             onClick={() => {
-              const u = new SpeechSynthesisUtterance("നമസ്കാരം! ഞാൻ അപ്പു.");
-              u.lang = 'ml-IN';
-              window.speechSynthesis.speak(u);
+              playIndianAudio("നമസ്കാരം! ഞാൻ അപ്പു.");
             }}
             title="Hello, I am Appu!"
           >

@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "motion/react";
 import { X, Volume2, ArrowRight, PlayCircle, CheckCircle2 } from "lucide-react";
 import { Button } from "@/src/components/ui/button";
 import confetti from "canvas-confetti";
+import { playIndianAudio } from "../lib/audio";
 
 export function LessonConsonants() {
   const navigate = useNavigate();
@@ -103,15 +104,7 @@ export function LessonConsonants() {
   };
 
   const playAudio = (text: string) => {
-    if ('speechSynthesis' in window) {
-      window.speechSynthesis.cancel();
-      const utterance = new SpeechSynthesisUtterance(text);
-      utterance.lang = 'ml-IN'; // Ensure Malayalam is used
-      utterance.rate = 0.8;
-      window.speechSynthesis.speak(utterance);
-    } else {
-      console.log(`Speech Synthesis not supported. Would have said: ${text}`);
-    }
+    playIndianAudio(text);
   };
 
   useEffect(() => {

@@ -39,7 +39,7 @@ Use emojis to make it fun!
 If a question is off-topic, gently steer it back to learning Malayalam.`;
 
       const response = await ai.models.generateContent({
-        model: "gemini-2.5-flash",
+        model: "gemini-1.5-flash",
         contents: prompt,
         config: {
           systemInstruction,
@@ -50,7 +50,21 @@ If a question is off-topic, gently steer it back to learning Malayalam.`;
       res.json({ answer: response.text });
     } catch (error: any) {
       console.error("Gemini API Error:", error);
-      res.status(500).json({ error: `Failed to connect to the AI teacher: ${error.message}` });
+      
+      let errorMessage = "An unexpected error occurred.";
+      if (error.message) {
+        errorMessage = error.message;
+        try {
+          const parsed = JSON.parse(error.message);
+          if (parsed.error && parsed.error.message) {
+            errorMessage = parsed.error.message;
+          }
+        } catch (e) {
+          // Not JSON
+        }
+      }
+      
+      res.status(500).json({ error: `Failed to connect to the AI teacher: ${errorMessage}` });
     }
   });
 

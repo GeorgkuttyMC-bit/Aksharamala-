@@ -3,6 +3,8 @@ import { Bot, X, Send, Loader2, Mic, MicOff, Volume2, VolumeX } from "lucide-rea
 import { motion, AnimatePresence } from "motion/react";
 import Markdown from "react-markdown";
 
+import { playIndianAudio, stopAudio } from "../lib/audio";
+
 interface Message {
   role: "user" | "assistant";
   content: string;
@@ -53,9 +55,7 @@ export function AIAssistant() {
     }
     
     return () => {
-      if ('speechSynthesis' in window) {
-        window.speechSynthesis.cancel();
-      }
+      stopAudio();
     }
   }, []);
 
@@ -78,24 +78,18 @@ export function AIAssistant() {
   
   const toggleVoiceOutput = () => {
     setIsVoiceOutputEnabled(prev => !prev);
-    if (isVoiceOutputEnabled && 'speechSynthesis' in window) {
-      window.speechSynthesis.cancel();
+    if (isVoiceOutputEnabled) {
+      stopAudio();
     }
   };
 
   const speakText = (text: string) => {
-    if (!isVoiceOutputEnabled || !('speechSynthesis' in window)) return;
-    
-    window.speechSynthesis.cancel(); // Stop any ongoing speech
+    if (!isVoiceOutputEnabled) return;
     
     // Strip emojis and basic markdown to make it sound better
     const cleanText = text.replace(/([^\w\s\u0d00-\u0d7f]+)/g, '').replace(/\*|#|_|~/g, '');
     
-    const utterance = new SpeechSynthesisUtterance(cleanText);
-    utterance.lang = "ml-IN"; // Set to Malayalam
-    utterance.rate = 1.0;
-    utterance.pitch = 1.1; // Make it sound a bit more playful
-    window.speechSynthesis.speak(utterance);
+    playIndianAudio(cleanText, undefined, { rate: 1.0, pitch: 1.1 });
   };
 
   const scrollToBottom = () => {
@@ -131,7 +125,13 @@ export function AIAssistant() {
       setMessages((prev) => [...prev, { role: "assistant", content: data.answer }]);
       speakText(data.answer);
     } catch (error: any) {
-      const errorMsg = `Oops! 🙊 ${error.message || "I couldn't reach the server."}`;
+      let errorMsg = "ക്ഷമിക്കണം! 🙊 എനിക്ക് നിങ്ങളുടെ ചോദ്യം മനസ്സിലാക്കാൻ കഴിഞ്ഞില്ല. ദയവായി കുറച്ചു കഴിഞ്ഞ് വീണ്ടും ശ്രമിക്കുക.";
+      
+      const rawMsg = (error.message || "").toLowerCase();
+      if (rawMsg.includes("503") || rawMsg.includes("high demand") || rawMsg.includes("unavailable") || rawMsg.includes("429") || rawMsg.includes("quota")) {
+        errorMsg = "ക്ഷമിക്കണം! 🙊 ഇപ്പോൾ എനിക്ക് കുറച്ചു തിരക്കാണ്. ദയവായി കുറച്ചു സമയം കഴിഞ്ഞ് വീണ്ടും ചോദിക്കാമോ?";
+      }
+
       setMessages((prev) => [
         ...prev,
         { role: "assistant", content: errorMsg }
