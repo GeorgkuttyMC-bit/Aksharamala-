@@ -90,25 +90,16 @@ export function HomePage() {
     currentlyPlayingRef.current = letter;
     setPlayingLetter(letter);
 
-    const playSequence = () => {
+    playIndianAudio(letter, () => {
       if (currentlyPlayingRef.current !== letter) return;
-
-      playIndianAudio(letter, () => {
-        if (currentlyPlayingRef.current !== letter) return;
-        
-        playIndianAudio(word, () => {
-          if (currentlyPlayingRef.current === letter) {
-            setTimeout(() => {
-              if (currentlyPlayingRef.current === letter) {
-                playSequence();
-              }
-            }, 800);
-          }
-        }, { cancel: false, rate: 0.8 });
+      
+      playIndianAudio(word, () => {
+        if (currentlyPlayingRef.current === letter) {
+          currentlyPlayingRef.current = null;
+          setPlayingLetter(null);
+        }
       }, { cancel: false, rate: 0.8 });
-    };
-
-    playSequence();
+    }, { cancel: false, rate: 0.8 });
   };
 
   return (
@@ -140,7 +131,7 @@ export function HomePage() {
             initial={{ scale: 0, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ type: "spring", bounce: 0.5, delay: 0.2 }}
-            className="mx-auto w-32 h-32 mb-6 cursor-pointer"
+            className="mx-auto w-32 h-32 md:w-40 md:h-40 mb-6 cursor-pointer"
             whileHover={{ scale: 1.1, rotate: 5 }}
             onClick={() => {
               playIndianAudio("നമസ്കാരം! ഞാൻ അപ്പു.");
@@ -276,7 +267,7 @@ export function HomePage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
             {vowels.map((v, i) => (
               <motion.div
                 key={v.letter}
@@ -332,7 +323,7 @@ export function HomePage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6 xl:gap-8">
             {consonants.map((c, i) => (
                <motion.div
                 key={c.letter}
