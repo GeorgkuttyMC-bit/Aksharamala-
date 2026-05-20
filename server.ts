@@ -39,7 +39,7 @@ Use emojis to make it fun!
 If a question is off-topic, gently steer it back to learning Malayalam.`;
 
       const response = await ai.models.generateContent({
-        model: "gemini-1.5-flash",
+        model: "gemini-3-flash-preview",
         contents: prompt,
         config: {
           systemInstruction,
