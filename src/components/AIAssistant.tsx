@@ -83,8 +83,8 @@ export function AIAssistant() {
     }
   };
 
-  const speakText = (text: string) => {
-    if (!isVoiceOutputEnabled) return;
+  const speakText = (text: string, force: boolean = false) => {
+    if (!isVoiceOutputEnabled && !force) return;
     
     // Strip emojis and basic markdown to make it sound better
     const cleanText = text.replace(/([^\w\s\u0d00-\u0d7f]+)/g, '').replace(/\*|#|_|~/g, '');
@@ -212,8 +212,18 @@ export function AIAssistant() {
                     }`}
                   >
                     {msg.role === "assistant" ? (
-                      <div className="prose prose-sm prose-stone">
-                        <Markdown>{msg.content}</Markdown>
+                      <div className="relative group">
+                        <div className="prose prose-sm prose-stone">
+                          <Markdown>{msg.content}</Markdown>
+                        </div>
+                        <button
+                          onClick={() => speakText(msg.content, true)}
+                          className="mt-2 text-stone-400 hover:text-amber-600 transition-colors flex items-center gap-1 text-[10px] uppercase font-bold tracking-wider"
+                          title="Listen to this message"
+                        >
+                          <Volume2 className="w-3.5 h-3.5" />
+                          Listen
+                        </button>
                       </div>
                     ) : (
                       msg.content
