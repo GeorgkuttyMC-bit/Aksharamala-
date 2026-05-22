@@ -14,19 +14,8 @@ export const playIndianAudio = (text: string, onEnd?: () => void, options?: { pi
     stopAudio();
   }
 
-  const isMobile = typeof navigator !== 'undefined' && /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-  
-  // On mobile devices, prioritize native SpeechSynthesis since Google TTS URL often gets
-  // blocked by CGNAT or loses user gesture context during async fallback.
-  if (isMobile && 'speechSynthesis' in window) {
-    // Unlock utterance context immediately
-    const unlockUtterance = new SpeechSynthesisUtterance('');
-    unlockUtterance.volume = 0;
-    window.speechSynthesis.speak(unlockUtterance);
-    
-    playWithSpeechSynthesis(text, onEnd, options);
-    return;
-  }
+  // Removed isMobile check to ensure we primarily use Google Translate TTS via HTTP
+  // which bypasses Android's "Use Wi-Fi only" limitation on native speech synthesis.
 
   // Use Google Translate TTS as it is much more reliable for Malayalam across all devices (PC, Mac)
   // because OS native voices for Malayalam are often missing on desktop PCs.
